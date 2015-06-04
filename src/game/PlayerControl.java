@@ -38,6 +38,8 @@ public class PlayerControl
 		sprites = new ImageView[3];
 		getSprites();
 		
+		this.map = map;
+		
 		player.getChildren().setAll(sprites[1]);
 
 		moveOnKeyPressed(player);
@@ -395,8 +397,11 @@ public class PlayerControl
 							{
 								
 								// add map shift operation
-//								TranslateTransition moveMap = new TranslateTransition();
-//								moveMap.
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), map);
+								moveMap.setFromX(map.getTranslateX());
+								moveMap.setFromY(map.getTranslateY());
+								moveMap.setToX(Game.WINDOW_WIDTH);
+								moveMap.playFromStart();
 								
 								
 								

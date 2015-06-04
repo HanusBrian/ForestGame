@@ -30,6 +30,7 @@ public class Player extends Group
 	public static final int LEFT = 3;
 
 	int tileSize;
+	Map map;
 	
 	// Current x and y position 
 	// the x and y are the grid positions not taking into account tileSize ( same with destx, desty )
@@ -45,6 +46,8 @@ public class Player extends Group
 	public Player(int x, int y, int tileSize, String sprites, Map map)
 	{
 		this.tileSize = tileSize;
+		this.map = map;
+		
 		loadSprites(sprites);
 		
 		this.x = x;
