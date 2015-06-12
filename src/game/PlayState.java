@@ -4,7 +4,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 
-public class PlayState extends GameState {
+public class PlayState extends GameState 
+{
 
 	private Map map;  // This is a canvas
 	private Player player;
@@ -25,7 +26,7 @@ public class PlayState extends GameState {
 				
 		map.printCMap();
 		
-		player = new Player(2, 1, tileSize, "player2.png", map);
+		player = new Player(2, 1, tileSize, "player2.png", map, this);
 		
 		draw();
 		

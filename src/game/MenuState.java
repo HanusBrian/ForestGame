@@ -1,4 +1,5 @@
 package game;
+
 import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,6 +29,7 @@ public class MenuState extends GameState
 	
 	private Rectangle rekt; 
 	
+	Font font;
 
 	
 	public MenuState(GameStateManager gsm)
@@ -49,7 +51,12 @@ public class MenuState extends GameState
 		title.setScaleX(4);
 		title.setScaleY(4);
 		title.setTranslateY(-100);
-		title.setFont(Font.font ("Serif", 20));
+		try{
+			font = Font.loadFont("file:AmaticSC-Regular.ttf", 50);
+		}
+		catch(Exception e)
+		{}
+		title.setFont(font);
 		title.setTextFill(Color.OLIVE);		
 		
 		startButton = new Button("Start Game");

@@ -40,13 +40,16 @@ public class Player extends Group
 
 	PlayerControl pc;
 	
+	PlayState gameState;
+	
 	// Sound effects
 	AudioClip bumpSound;
 	
-	public Player(int x, int y, int tileSize, String sprites, Map map)
+	public Player(int x, int y, int tileSize, String sprites, Map map, PlayState gameState)
 	{
 		this.tileSize = tileSize;
 		this.map = map;
+		this.gameState = gameState;
 		
 		loadSprites(sprites);
 		
@@ -58,7 +61,7 @@ public class Player extends Group
 		
 		bumpSound = new AudioClip("file:ungh.wav");
 		
-		pc = new PlayerControl(this, map);
+		pc = new PlayerControl(this, map, gameState);
 		
 	}
 	

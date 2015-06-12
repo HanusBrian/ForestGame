@@ -29,9 +29,11 @@ public class PlayerControl
 	
 	Map map;
 	
+	PlayState gameState;
 	
 	
-	public PlayerControl(Player player, Map map)
+	
+	public PlayerControl(Player player, Map map, PlayState gameState)
 	{
 
 		this.player = player;
@@ -44,6 +46,8 @@ public class PlayerControl
 
 		moveOnKeyPressed(player);
 		player.requestFocus();
+		
+		this.gameState = gameState;
 		
 	}
 	
@@ -139,7 +143,6 @@ public class PlayerControl
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX(player.getTranslateX());
 										transition1.setToY((player.getTranslateY() - 16));
-										transition1.setDuration(Duration.millis(100));
 										transition1.playFromStart();
 										
 										player.bumpSound.play();
@@ -156,7 +159,6 @@ public class PlayerControl
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX(player.getTranslateX());
 										transition2.setToY((player.getTranslateY() + 16));
-										transition2.setDuration(Duration.millis(100));
 										transition2.playFromStart();
 
 									}
@@ -212,7 +214,6 @@ public class PlayerControl
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX(player.getTranslateX());
 										transition1.setToY((player.getTranslateY() + 16));
-										transition1.setDuration(Duration.millis(100));
 										transition1.playFromStart();
 										
 										player.bumpSound.play();
@@ -229,7 +230,6 @@ public class PlayerControl
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX(player.getTranslateX());
 										transition2.setToY((player.getTranslateY() - 16));
-										transition2.setDuration(Duration.millis(100));
 										transition2.playFromStart();
 
 									}
@@ -284,7 +284,6 @@ public class PlayerControl
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX((player.getTranslateX() - 16));
 										transition1.setToY(player.getTranslateY());
-										transition1.setDuration(Duration.millis(100));
 										transition1.playFromStart();
 										
 										player.bumpSound.play();
@@ -301,7 +300,7 @@ public class PlayerControl
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX((player.getTranslateX() + 16));
 										transition2.setToY(player.getTranslateY());
-										transition2.setDuration(Duration.millis(100));
+//										transition2.setDuration(Duration.millis(100));
 										transition2.playFromStart();
 
 									}
@@ -319,6 +318,22 @@ public class PlayerControl
 						}
 						else
 						{
+							
+							if(player.destx == 9)
+							{
+								
+								// add map shift operation
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), gameState);
+								moveMap.setFromX(gameState.getTranslateX());
+								moveMap.setFromY(gameState.getTranslateY());
+								moveMap.setToX(0);
+								moveMap.playFromStart();
+								
+								System.out.println("Player has walked off screen");
+								
+							}
+							
+							
 							player.setSprites(Player.LEFT);
 							getSprites();
 							
@@ -358,7 +373,6 @@ public class PlayerControl
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX((player.getTranslateX() + 16));
 										transition1.setToY(player.getTranslateY());
-										transition1.setDuration(Duration.millis(100));
 										transition1.playFromStart();
 										
 										player.bumpSound.play();
@@ -375,7 +389,6 @@ public class PlayerControl
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX((player.getTranslateX() - 16));
 										transition2.setToY(player.getTranslateY());
-										transition2.setDuration(Duration.millis(100));
 										transition2.playFromStart();
 										
 									}
@@ -393,19 +406,23 @@ public class PlayerControl
 						}
 						else
 						{
+							
+							// TODO shift the map when player walks off screen
 							if(player.destx == 10)
 							{
 								
 								// add map shift operation
-								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), map);
-								moveMap.setFromX(map.getTranslateX());
-								moveMap.setFromY(map.getTranslateY());
-								moveMap.setToX(Game.WINDOW_WIDTH);
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), gameState);
+								moveMap.setFromX(gameState.getTranslateX());
+								moveMap.setFromY(gameState.getTranslateY());
+								moveMap.setToX(-650);
 								moveMap.playFromStart();
 								
-								
+								System.out.println("Player has walked off screen");
 								
 							}
+							
+							
 							player.setSprites(Player.RIGHT);
 							getSprites();
 							
