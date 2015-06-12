@@ -323,7 +323,7 @@ public class PlayerControl
 							{
 								
 								// add map shift operation
-								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), gameState);
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(500), gameState);
 								moveMap.setFromX(gameState.getTranslateX());
 								moveMap.setFromY(gameState.getTranslateY());
 								moveMap.setToX(0);
@@ -412,7 +412,7 @@ public class PlayerControl
 							{
 								
 								// add map shift operation
-								TranslateTransition moveMap = new TranslateTransition(Duration.millis(300), gameState);
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(500), gameState);
 								moveMap.setFromX(gameState.getTranslateX());
 								moveMap.setFromY(gameState.getTranslateY());
 								moveMap.setToX(-650);

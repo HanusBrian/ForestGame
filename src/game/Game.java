@@ -7,7 +7,7 @@ public class Game extends Application
 {
 
 	public static double WINDOW_HEIGHT = 665;
-	public static double WINDOW_WIDTH = 645; //645
+	public static double WINDOW_WIDTH = 645; //645 normal, 1290 to see entire map
 	public static Stage window;
 	public static GameScene gameScene;
 	public static GameStateManager gsm;

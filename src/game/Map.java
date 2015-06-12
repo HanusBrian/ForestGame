@@ -31,6 +31,7 @@ public class Map extends Canvas
 	// could add map select here too in the future 
 	public Map(int tileSize, String tiles, String map)
 	{
+		super(1290, 665);
 		this.tileSize = tileSize;
 		loadTiles(tiles);
 		loadMap(map);
