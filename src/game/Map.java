@@ -5,11 +5,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Scanner;
+
 import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 
 
 
@@ -31,7 +35,6 @@ public class Map extends Canvas
 	// could add map select here too in the future 
 	public Map(int tileSize, String tiles, String map)
 	{
-		super(1290, 665);
 		this.tileSize = tileSize;
 		loadTiles(tiles);
 		loadMap(map);
@@ -134,6 +137,8 @@ public class Map extends Canvas
 					
 					map[row][col] = temp.charAt(0);
 					temp = temp.substring(1);
+					
+					// create collision map
 					if(map[row][col] == '0')
 					{
 						cMap[row][col] = new Tile(tileSet[0].image, Tile.NORMAL);
@@ -158,13 +163,10 @@ public class Map extends Canvas
 		}
 	}
 	
-	// Draw the images to a canvas (gc.canvas) and creates collision map (cMap)
+	// Draw the images to a canvas (gc.canvas)
 	public void draw(GraphicsContext gc)
 	{
 //		showMap();
-		
-
-		// create a tile[][] to keep track of collisions
 		
 		for(int row = 0; row < map.length; row++)
 		{
@@ -174,7 +176,6 @@ public class Map extends Canvas
 				{
 					
 					gc.drawImage(tileSet[0].image, col * tileSize, row * tileSize);
-
 				}
 				else if(map[row][col] == '1')
 				{
@@ -188,6 +189,11 @@ public class Map extends Canvas
 				}
 			}
 		}
+//		WritableImage mapImage = null;
+//		gc.getCanvas().snapshot(null, mapImage);
+//		ImageView image = new ImageView(mapImage);
+//		
+//		return image;
 	}
 	
 	
@@ -214,6 +220,16 @@ public class Map extends Canvas
 			}
 			System.out.println();
 		}
+	}
+	
+	public int getTilesWide()
+	{
+		return width;
+	}
+	
+	public int getTilesHigh()
+	{
+		return height;
 	}
 }
 

@@ -1,5 +1,6 @@
 package game;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -12,6 +13,8 @@ public class PlayState extends GameState
 	private int tileSize = 64;
 	
 	private Canvas canvas;
+	Group canvasGroup;
+	
 	private GraphicsContext gc;
 	
 	public PlayState(GameStateManager gsm)
@@ -22,7 +25,7 @@ public class PlayState extends GameState
 	@Override
 	public void init() {
 		
-		map = new Map(tileSize, "tiles2.png", "map5.txt");
+		map = new Map(tileSize, "tiles2.png", "map6.txt");
 				
 		map.printCMap();
 		
@@ -31,8 +34,9 @@ public class PlayState extends GameState
 		draw();
 		
 		player.pc.setMap(map);
+		canvasGroup = new Group(canvas);
 		
-		this.getChildren().addAll(map, player);
+		this.getChildren().addAll(canvasGroup, player);
 		
 		GameScene scene = new GameScene(this);
 		Game.window.setScene(scene);
@@ -43,7 +47,7 @@ public class PlayState extends GameState
 	public void draw()
 	{
 		canvas = null;
-		canvas = new Canvas(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
+		canvas = new Canvas(map.getTilesWide() * tileSize, map.getTilesHigh() * tileSize);
 		gc = canvas.getGraphicsContext2D();
 		
 		map.draw(gc);

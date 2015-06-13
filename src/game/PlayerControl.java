@@ -177,6 +177,20 @@ public class PlayerControl
 						}
 						else
 						{
+							
+							if(player.desty % 10 == 9)
+							{
+								
+								// add map shift operation
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(500), gameState);
+								moveMap.setFromX(gameState.getTranslateX());
+								moveMap.setFromY(gameState.getTranslateY());
+								moveMap.setToY(0);
+								moveMap.playFromStart();
+								
+								System.out.println("Player has walked off screen");
+								
+							}
 
 							transition.setFromX(player.getTranslateX());
 							transition.setFromY(player.getTranslateY());
@@ -248,6 +262,20 @@ public class PlayerControl
 						}
 						else
 						{
+							if(player.desty % 10 == 0)
+							{
+								
+								// add map shift operation
+								TranslateTransition moveMap = new TranslateTransition(Duration.millis(500), gameState);
+								moveMap.setFromX(gameState.getTranslateX());
+								moveMap.setFromY(gameState.getTranslateY());
+								moveMap.setToY(-Game.WINDOW_HEIGHT + 20);
+								moveMap.playFromStart();
+								
+								System.out.println("Player has walked off screen");
+								
+							}
+							
 							transition.setFromX(player.getTranslateX());
 							transition.setFromY(player.getTranslateY());
 							transition.setToX(player.getTranslateX());
@@ -300,7 +328,6 @@ public class PlayerControl
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX((player.getTranslateX() + 16));
 										transition2.setToY(player.getTranslateY());
-//										transition2.setDuration(Duration.millis(100));
 										transition2.playFromStart();
 
 									}
@@ -319,7 +346,7 @@ public class PlayerControl
 						else
 						{
 							
-							if(player.destx == 9)
+							if(player.destx % 10 == 9)
 							{
 								
 								// add map shift operation
@@ -328,6 +355,7 @@ public class PlayerControl
 								moveMap.setFromY(gameState.getTranslateY());
 								moveMap.setToX(0);
 								moveMap.playFromStart();
+								
 								
 								System.out.println("Player has walked off screen");
 								
@@ -408,15 +436,16 @@ public class PlayerControl
 						{
 							
 							// TODO shift the map when player walks off screen
-							if(player.destx == 10)
+							if(player.destx % 10 == 0)
 							{
 								
 								// add map shift operation
-								TranslateTransition moveMap = new TranslateTransition(Duration.millis(500), gameState);
-								moveMap.setFromX(gameState.getTranslateX());
-								moveMap.setFromY(gameState.getTranslateY());
-								moveMap.setToX(-650);
-								moveMap.playFromStart();
+								TranslateTransition moveGroup = new TranslateTransition(Duration.millis(500), gameState);
+								moveGroup.setFromX(gameState.getTranslateX());
+								moveGroup.setFromY(gameState.getTranslateY());
+								moveGroup.setToX(-Game.WINDOW_WIDTH + 10);
+								moveGroup.playFromStart();
+
 								
 								System.out.println("Player has walked off screen");
 								
