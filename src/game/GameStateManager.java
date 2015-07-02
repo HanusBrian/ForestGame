@@ -1,5 +1,10 @@
-package game;
+/*
+ *	GameStateManager is responsible for switching between the 
+ *	game states.
+ *
+ */
 
+package game;
 
 public class GameStateManager 
 {
@@ -8,15 +13,16 @@ public class GameStateManager
 	int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 3;
+	public static final int NUM_STATES = 4;
 	
 	public static final int INTRO = 0;
 	public static final int MENU = 1;
 	public static final int PLAY = 2;
+	public static final int FISH = 3;
 	
 	public static GameScene scene;
 	
-	//TODO property Bind gsm to the states.
+	// On initialization the GameStateManager sets the current state to the intro state
 	public GameStateManager()
 	{
 		
@@ -25,6 +31,7 @@ public class GameStateManager
 
 	}
 	
+	// Sets the last running state to null then loads and initializes the new state.
 	public void setState(int i)
 	{
 		previousState = currentState;
@@ -37,10 +44,7 @@ public class GameStateManager
 			{
 				gameStates[i] = new IntroState(this);
 				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
-				
-//				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
+
 				
 			} break;
 			
@@ -48,10 +52,7 @@ public class GameStateManager
 			{
 				gameStates[i] = new MenuState(this);
 				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
-//				Game.window.setScene(scene);
-//				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
+
 				
 			} break;
 			
@@ -59,11 +60,15 @@ public class GameStateManager
 			{
 				gameStates[i] = new PlayState(this);
 				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
-//				Game.window.setScene(scene);
-//				gameStates[i].init();
-//				scene = new Scene(gameStates[i]);
 
+
+			} break;
+			
+			case 3:
+			{
+				gameStates[i] = new FishingState(this);
+				gameStates[i].init();
+				
 			} break;
 			
 			default: break;
@@ -71,6 +76,7 @@ public class GameStateManager
 		
 	}
 	
+	// Sets state to null
 	public void unloadState(int i)
 	{
 		gameStates[i] = null;

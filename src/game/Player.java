@@ -1,3 +1,9 @@
+/*
+ *	The player class holds and prepares the images used to render the player.
+ *	This class also holds the position and traits of the player character.
+ *
+ */
+
 package game;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -28,6 +34,8 @@ public class Player extends Group
 	public static final int RIGHT = 1;
 	public static final int DOWN = 2;
 	public static final int LEFT = 3;
+	
+	private boolean hasBoat;
 
 	int tileSize;
 	Map map;
@@ -73,19 +81,22 @@ public class Player extends Group
 		this.setTranslateY(screeny);
 	}
 	
+	// If proposed destination is not blocked this sets the 
+	// new player position.
 	public void moveSuccess()
 	{
 		this.x = destx;
 		this.y = desty;
 	}
 	
+	// Sets proposed destination
 	public void setDestination(int x, int y)
 	{
 		this.destx = x;
 		this.desty = y;
 	}
 	
-	// Set current sprites to direction of int input
+	// Set current sprites to direction of input
 	public void setSprites(int i)
 	{
 		switch (i)
@@ -110,7 +121,9 @@ public class Player extends Group
 	}
 
 	
-	// Cuts image up (hard coded rows and cols) 
+	// Image is a block of sprites, loadSprites 
+	// loads the file and separates the individual
+	// images (hard coded rows and cols) 
 	public void loadSprites(String s)
 	{
 		try
@@ -129,13 +142,13 @@ public class Player extends Group
 			int imageWidth = image.getWidth() / numTilesWide;
 			int imageHeight = image.getHeight() / numTilesHigh;
 			
-
-			
+			// Initialize the arrays for each direction group of movement sprites
 			upSprites = new Image[numTilesWide];
 			rightSprites = new Image[numTilesWide];
 			downSprites = new Image[numTilesWide];
 			leftSprites = new Image[numTilesWide];
 			
+			// Separates and saves the images to the sprite arrays
 			for(int i = 0; i < numTilesHigh; i++)
 			{
 				for(int j = 0; j < numTilesWide; j++)
@@ -193,5 +206,9 @@ public class Player extends Group
 		return scaledImage;
 	}
 
-	
+	// Checks if the player has a boat
+	public boolean hasBoat()
+	{
+		return hasBoat;
+	}
 }

@@ -1,3 +1,10 @@
+/*
+ * 	The IntroState plays an intro sound as it fades in from a black rectangle 
+ * 	to the splash screen file image and fades back to black.  
+ * 	Then when finished calls the menu state.
+ * 
+ */
+
 package game;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -17,7 +24,7 @@ public class IntroState extends GameState
 	public IntroState(GameStateManager gsm)
 	{
 		super(gsm);
-//		init();
+
 	}
 
 	@Override

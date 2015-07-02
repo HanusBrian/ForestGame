@@ -1,3 +1,11 @@
+/*
+ *	The map class loads the tile images to the tileSet and sets the type of 
+ *	each tile. This class will load in the ascii map and create a collision map
+ *	which is an array of tile objects. From the ascii map the class will then draw
+ *	the images to the map class which is a canvas.
+ *	
+ */
+
 package game;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,9 +20,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-
 
 
 public class Map extends Canvas
@@ -43,7 +48,6 @@ public class Map extends Canvas
 	}
 	
 	// Loads Tile Images and types from file and puts them into the tile array (tileSet)
-	
 	public void loadTiles(String s)
 	{
 		try
@@ -57,7 +61,7 @@ public class Map extends Canvas
 			int numTilesHigh = 1;
 			int numTiles = numTilesWide * numTilesHigh;
 			
-			//TODO Temporary in order to try different tile sizes
+			//TODO Temporary in order to try different tile sizes, resizes the entire tile sheet
 			BufferedImage image = resizeImage(img, tileSize * numTilesWide, tileSize * numTilesHigh);
 			
 			int imageWidth = image.getWidth() / numTilesWide;
@@ -67,6 +71,7 @@ public class Map extends Canvas
 			
 			tileSet = new Tile[numTiles];
 			
+			// Separates the tile images to the tileSet array and stores the type of the tile
 			for(int i = 0; i < numTilesHigh; i++)
 			{
 				for(int j = 0; j < numTilesWide; j++)
@@ -113,7 +118,7 @@ public class Map extends Canvas
 		return scaledImage;
 	}
 	
-		// Loads from text file (s) and creates a 2D char array (map) to serve as the map
+	// Loads from text file (s) and creates a 2D char array (map) to serve as the map
 	public void loadMap(String s)
 
 	{
@@ -149,7 +154,7 @@ public class Map extends Canvas
 					}
 					else if(map[row][col] == '2')
 					{
-						cMap[row][col] = new Tile(tileSet[2].image, Tile.BLOCKED);
+						cMap[row][col] = new Tile(tileSet[2].image, Tile.WATER);
 					}
 				}
 			}
@@ -189,11 +194,6 @@ public class Map extends Canvas
 				}
 			}
 		}
-//		WritableImage mapImage = null;
-//		gc.getCanvas().snapshot(null, mapImage);
-//		ImageView image = new ImageView(mapImage);
-//		
-//		return image;
 	}
 	
 	
@@ -210,6 +210,7 @@ public class Map extends Canvas
 		}
 	}
 
+	// Print the collision map to the console
 	public void printCMap()
 	{
 		for(int i = 0; i < cMap.length; i++)

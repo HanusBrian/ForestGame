@@ -1,3 +1,7 @@
+/*
+ *	The GameScene class is the scene of the application.
+ */
+
 package game;
 import javafx.scene.Group;
 import javafx.scene.Scene;

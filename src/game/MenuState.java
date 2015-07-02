@@ -1,3 +1,10 @@
+/*
+ * 	The menu state displays the title of the game and a start button on 
+ * 	top of a background image. The start button will take to application
+ * 	to the play state.
+ * 
+ */
+
 package game;
 
 import javafx.animation.FadeTransition;
@@ -36,7 +43,6 @@ public class MenuState extends GameState
 	{
 		
 		super(gsm);
-//		init();
 	}
 	
 	public void init()
@@ -81,7 +87,8 @@ public class MenuState extends GameState
 		GameScene scene = new GameScene(this);
 		Game.window.setScene(scene);
 		
-
+		// Continues the fade transition from the intro state.  Fades 
+		// from black to the menu scene.
 		FadeTransition ft = new FadeTransition(Duration.millis(2000), rekt);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
