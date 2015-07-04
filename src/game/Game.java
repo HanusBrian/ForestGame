@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Game extends Application 
 {
 
-	public static double WINDOW_HEIGHT = 665;
+	public static double WINDOW_HEIGHT = 665; // 665 normal, 1330 to see entire map
 	public static double WINDOW_WIDTH = 645; //645 normal, 1290 to see entire map
 	
 	public static Stage window;

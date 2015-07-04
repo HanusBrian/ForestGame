@@ -43,7 +43,6 @@ public class Map extends Canvas
 		this.tileSize = tileSize;
 		loadTiles(tiles);
 		loadMap(map);
-//		draw();	
 		
 	}
 	
@@ -171,7 +170,6 @@ public class Map extends Canvas
 	// Draw the images to a canvas (gc.canvas)
 	public void draw(GraphicsContext gc)
 	{
-//		showMap();
 		
 		for(int row = 0; row < map.length; row++)
 		{
@@ -231,6 +229,11 @@ public class Map extends Canvas
 	public int getTilesHigh()
 	{
 		return height;
+	}
+	
+	public void setTileType(int x, int y, int type)
+	{
+		cMap[y][x].type = type;
 	}
 }
 

@@ -20,7 +20,10 @@ public class GameStateManager
 	public static final int PLAY = 2;
 	public static final int FISH = 3;
 	
+	
 	public static GameScene scene;
+	
+	private SaveState saveState;
 	
 	// On initialization the GameStateManager sets the current state to the intro state
 	public GameStateManager()
@@ -34,6 +37,10 @@ public class GameStateManager
 	// Sets the last running state to null then loads and initializes the new state.
 	public void setState(int i)
 	{
+		if(currentState == PLAY)
+		{
+			saveState = new SaveState(gameStates[PLAY]);
+		}
 		previousState = currentState;
 		unloadState(previousState);
 		currentState = i;
@@ -58,8 +65,17 @@ public class GameStateManager
 			
 			case 2: 
 			{
-				gameStates[i] = new PlayState(this);
-				gameStates[i].init();
+				if(saveState != null)
+				{
+					gameStates[i] = new PlayState(this);
+					((PlayState) gameStates[i]).loadSaved(saveState);
+				}
+				else
+				{
+					gameStates[i] = new PlayState(this);
+					gameStates[i].init();
+
+				}
 
 
 			} break;

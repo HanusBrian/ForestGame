@@ -69,8 +69,8 @@ public class FishingState extends GameState
 		playerImageCast.setScaleY(6);
 		
 		Group player = new Group(playerImageWait);
-		player.setTranslateX(150);
-		player.setTranslateY(540);
+		player.setLayoutX(150);
+		player.setLayoutY(540);
 		
 		Group group = new Group(water, bobber, player, hud, instructions);
 
@@ -152,10 +152,15 @@ public class FishingState extends GameState
 							Thread thread = new Thread(ft);
 							thread.start();
 							
-						}
-						
+						} 
 					});
 					
+				} break;
+				
+				case ESCAPE:
+				{
+					System.out.println("ESC pressed");
+					gsm.setState(GameStateManager.PLAY);
 				} break;
 				default:break;
 			}

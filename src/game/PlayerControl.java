@@ -7,11 +7,12 @@
  */
 
 package game;
+
 import javafx.animation.Animation;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
@@ -29,8 +30,6 @@ public class PlayerControl
 	final Duration Q1 = Duration.millis(100);
 	final Duration Q2 = Duration.millis(200);
 	final Duration Q3 = Duration.millis(300);
-	
-	Group pg;
 	
 	ImageView[] sprites;
 	
@@ -72,7 +71,8 @@ public class PlayerControl
 		
 		System.out.println("DestX: x = " + player.destx + " DestY = " + player.desty);
 		System.out.println(cMap[player.desty][player.destx].type);
-		if(cMap[player.desty][player.destx].type == Tile.BLOCKED) 
+		if(cMap[player.desty][player.destx].type == Tile.BLOCKED || 
+				cMap[player.desty][player.destx].type == Tile.NPC) 
 		{ 
 			return true; 
 		}
@@ -145,7 +145,8 @@ public class PlayerControl
 					case UP:
 					{
 						// Set sprite direction and destination
-						player.setSprites(Player.UP);
+						player.direction = Player.UP;
+						player.setSprites(player.direction);
 						getSprites();
 						player.setDestination(player.x, player.y - 1);
 
@@ -163,8 +164,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[0]);
+										
 										final TranslateTransition transitionBlocked = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[0]);
 										transitionBlocked.setFromX(player.getTranslateX());
 										transitionBlocked.setFromY(player.getTranslateY());
 										transitionBlocked.setToX(player.getTranslateX());
@@ -180,8 +181,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[1]);
+										
 										TranslateTransition transition2 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[1]);
 										transition2.setFromX(player.getTranslateX());
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX(player.getTranslateX());
@@ -224,6 +225,7 @@ public class PlayerControl
 							
 							// Move the player
 							final TranslateTransition playerTransition = new TranslateTransition(MOVEDURATION, player);
+							playerTransition.setInterpolator(Interpolator.LINEAR);
 							playerTransition.setFromX(player.getTranslateX());
 							playerTransition.setFromY(player.getTranslateY());
 							playerTransition.setToX(player.getTranslateX());
@@ -242,7 +244,9 @@ public class PlayerControl
 					case DOWN:
 					{
 						
-						player.setSprites(Player.DOWN);
+						player.direction = Player.DOWN;
+						
+						player.setSprites(player.direction);
 						getSprites();
 						
 						player.setDestination(player.x, player.y + 1);
@@ -258,8 +262,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[0]);
+										
 										TranslateTransition transition1 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[0]);
 										transition1.setFromX(player.getTranslateX());
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX(player.getTranslateX());
@@ -274,8 +278,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[1]);
+										
 										TranslateTransition transition2 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[1]);
 										transition2.setFromX(player.getTranslateX());
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX(player.getTranslateX());
@@ -313,6 +317,7 @@ public class PlayerControl
 							}
 							
 							final TranslateTransition playerTransition = new TranslateTransition(MOVEDURATION, player);
+							playerTransition.setInterpolator(Interpolator.LINEAR);
 							playerTransition.setFromX(player.getTranslateX());
 							playerTransition.setFromY(player.getTranslateY());
 							playerTransition.setToX(player.getTranslateX());
@@ -329,6 +334,8 @@ public class PlayerControl
 					case A:
 					case LEFT:
 					{
+						player.direction = Player.LEFT;
+						
 						player.setSprites(Player.LEFT);
 						getSprites();
 						
@@ -346,8 +353,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[0]);
+										
 										TranslateTransition transition1 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[0]);
 										transition1.setFromX(player.getTranslateX());
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX((player.getTranslateX() - blockedMove));
@@ -362,8 +369,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[1]);
+										
 										TranslateTransition transition2 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[1]);
 										transition2.setFromX(player.getTranslateX());
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX((player.getTranslateX() + blockedMove));
@@ -402,6 +409,7 @@ public class PlayerControl
 							}
 							
 							final TranslateTransition playerTransition = new TranslateTransition(MOVEDURATION, player);
+							playerTransition.setInterpolator(Interpolator.LINEAR);
 							playerTransition.setFromX(player.getTranslateX());
 							playerTransition.setFromY(player.getTranslateY());
 							playerTransition.setToX(player.getTranslateX() - STEP_SIZE);
@@ -418,7 +426,9 @@ public class PlayerControl
 					case D:
 					case RIGHT:
 					{
-						player.setSprites(Player.RIGHT);
+						player.direction = Player.RIGHT;
+						
+						player.setSprites(player.direction);
 						getSprites();
 						
 						player.setDestination(player.x + 1, player.y);
@@ -435,8 +445,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[0]);
+										
 										TranslateTransition transition1 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[0]);
 										transition1.setFromX(player.getTranslateX());
 										transition1.setFromY(player.getTranslateY());
 										transition1.setToX((player.getTranslateX() + blockedMove));
@@ -451,8 +461,8 @@ public class PlayerControl
 									public void handle(ActionEvent t)
 									{
 										player.getChildren().setAll(sprites[1]);
+										
 										TranslateTransition transition2 = new TranslateTransition(BLOCKEDDURATION, player);
-										player.getChildren().setAll(sprites[1]);
 										transition2.setFromX(player.getTranslateX());
 										transition2.setFromY(player.getTranslateY());
 										transition2.setToX((player.getTranslateX() - blockedMove));
@@ -492,6 +502,7 @@ public class PlayerControl
 							}
 							
 							final TranslateTransition playerTransition = new TranslateTransition(MOVEDURATION, player);
+							playerTransition.setInterpolator(Interpolator.LINEAR);
 							playerTransition.setFromX(player.getTranslateX());
 							playerTransition.setFromY(player.getTranslateY());
 							playerTransition.setToX(player.getTranslateX() + STEP_SIZE);
@@ -507,21 +518,64 @@ public class PlayerControl
 					
 					case SPACE:
 					{
-						// Check if any of the surrounding tiles are water
-						if(cMap[player.y][player.x + 1].type == Tile.WATER || cMap[player.y][player.x - 1].type == Tile.WATER || 
-								cMap[player.y + 1][player.x].type == Tile.WATER || cMap[player.y - 1][player.x].type == Tile.WATER)
+						// If the action button is pressed, check for the direction of the player
+						// The tile that the player is facing will be acted upon.
+						switch(player.direction)
 						{
-
-							System.out.println("SpaceBar pressed");
-							// Open new fishing scene
-							Game.gsm.setState(3);
-							
-						}
 						
+							case Player.UP:
+							{
+								// If the player is facing an NPC open a dialogue.
+								if(cMap[player.y - 1][player.x].type == Tile.NPC)
+								{
+									gameState.openDialogue();
+								}
+								// If the player is facing water, open fishing state.
+								else if(cMap[player.y - 1][player.x].type == Tile.WATER)
+								{
+									// Fade transition with a screen rotate to go into fishing
+									Game.gsm.setState(3);
+								}
+							} break;
+							
+							case Player.RIGHT:
+							{
+								if(cMap[player.y][player.x + 1].type == Tile.NPC)
+								{
+									gameState.openDialogue();
+								}
+								else if(cMap[player.y][player.x + 1].type == Tile.WATER)
+								{
+									Game.gsm.setState(3);
+								}
+							} break;
+							
+							case Player.DOWN:
+							{
+								if(cMap[player.y + 1][player.x].type == Tile.NPC)
+								{
+									gameState.openDialogue();
+								}
+								else if(cMap[player.y + 1][player.x].type == Tile.WATER)
+								{
+									Game.gsm.setState(3);
+								}
+							} break;
+							
+							case Player.LEFT:
+							{
+								if(cMap[player.y][player.x - 1].type == Tile.NPC)
+								{
+									gameState.openDialogue();
+								}
+								else if(cMap[player.y][player.x - 1].type == Tile.WATER)
+								{
+									Game.gsm.setState(3);
+								}
+							} break;
+							default:break;
+						}
 					}
-					
-					default:break;
-				
 				}
 			}
 		});

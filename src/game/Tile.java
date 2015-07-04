@@ -18,6 +18,7 @@ public class Tile {
 	public static final int NORMAL = 0;
 	public static final int BLOCKED = 1;
 	public static final int WATER = 2;
+	public static final int NPC = 3;
 	
 	public Tile(Image image, int type)
 	{

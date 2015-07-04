@@ -17,8 +17,7 @@ public abstract class GameState extends Group
 	{
 		this.gsm = gsm;
 	}
-	
-	
+
 	public abstract void init();
 
 }
