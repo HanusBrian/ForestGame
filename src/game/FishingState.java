@@ -161,15 +161,16 @@ public class FishingState extends GameState
 				{
 					System.out.println("ESC pressed");
 					gsm.setState(GameStateManager.PLAY);
+					
 				} break;
 				default:break;
 			}
 		});
 		
 		Scene scene = new Scene(group);
-		group.requestFocus();
-		
 		Game.window.setScene(scene);
+		
+		group.requestFocus();
 	
 	}
 	

@@ -51,7 +51,7 @@ public class PlayerControl
 		
 		this.cMap = map.cMap;
 		
-		moveOnKeyPressed(player);
+		listenForKeyPressed(player);
 		player.requestFocus();
 		
 		this.gameState = gameState;
@@ -95,7 +95,7 @@ public class PlayerControl
 		}
 	}
 	
-	public void moveOnKeyPressed(Player player)
+	public void listenForKeyPressed(Player player)
 	{
 		
 		// Time line tl sets the sprites for the walking animation in the correct direction
@@ -534,7 +534,8 @@ public class PlayerControl
 								else if(cMap[player.y - 1][player.x].type == Tile.WATER)
 								{
 									// Fade transition with a screen rotate to go into fishing
-									Game.gsm.setState(3);
+									
+									Game.gsm.setState(GameStateManager.FISH);
 								}
 							} break;
 							
@@ -546,7 +547,7 @@ public class PlayerControl
 								}
 								else if(cMap[player.y][player.x + 1].type == Tile.WATER)
 								{
-									Game.gsm.setState(3);
+									Game.gsm.setState(GameStateManager.FISH);
 								}
 							} break;
 							
@@ -558,7 +559,7 @@ public class PlayerControl
 								}
 								else if(cMap[player.y + 1][player.x].type == Tile.WATER)
 								{
-									Game.gsm.setState(3);
+									Game.gsm.setState(GameStateManager.FISH);
 								}
 							} break;
 							
@@ -570,12 +571,12 @@ public class PlayerControl
 								}
 								else if(cMap[player.y][player.x - 1].type == Tile.WATER)
 								{
-									Game.gsm.setState(3);
+									Game.gsm.setState(GameStateManager.FISH);
 								}
 							} break;
-							default:break;
 						}
 					}
+				default: break;
 				}
 			}
 		});

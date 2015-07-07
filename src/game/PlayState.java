@@ -116,7 +116,6 @@ public class PlayState extends GameState
 		Scene scene = new Scene(group);
 		Game.window.setScene(scene);
 		
-		
 		dialogue.init();
 	}
 }
